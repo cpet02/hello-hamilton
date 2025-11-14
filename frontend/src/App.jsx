@@ -1,21 +1,16 @@
-import { useEffect, useState } from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
-function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch("http://localhost:3000")
-      .then(res => res.text())
-      .then(data => setMessage(data))
-      .catch(err => console.error(err));
-  }, []);
-
+export default function App() {
   return (
-    <div style={{ padding: "20px", fontSize: "20px" }}>
-      <h1>Frontend + Backend Test</h1>
-      <p>Backend says: {message}</p>
+    <div style={{ height: "100vh", width: "100%" }}>
+      <MapContainer
+        center={[43.2557, -79.8711]}
+        zoom={13}
+        style={{ height: "100%", width: "100%" }}
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      </MapContainer>
     </div>
   );
 }
-
-export default App;
