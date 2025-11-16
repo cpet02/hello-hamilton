@@ -1,0 +1,19 @@
+.filter-panel {
+  width: 300px;
+  padding: 20px;
+  background: #f8f8f8;
+  border-right: 1px solid #ddd;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.filter-section {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-section label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}

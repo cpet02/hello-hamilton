@@ -1,56 +1,13 @@
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-
-import { MapContainer, TileLayer } from "react-leaflet";
-import { Marker, Popup } from "react-leaflet";
-
-import { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { defaultIcon } from "../utils/mapIcons";
 
-export default function MapView() {
+export default function MapView({ events }) {
   const hamiltonCenter = [43.2557, -79.8711];
-
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/events")
-      .then(res => res.json())
-      .then(data => setEvents(data))
-      .catch(err => console.error("Error fetching events:", err));
-  }, []);
-
-  const [filters, setFilters] = useState({
-    category: null,
-    cost: null,
-    indoorOutdoor: null,
-    energyLevel: null,
-    groupSize: null,
-  });  
-
-  const filteredEvents = events.filter(event => {
-    if (filters.category && event.category !== filters.category) {
-      return false;
-    }
-    return true;
-  });
-  
-  
 
   return (
     <div style={{ height: "100vh", width: "100%" }}>
-      <div style={{ position: "absolute", top: 10, left: 10, zIndex: 1000, background: "white", padding: "8px", borderRadius: "5px" }}>
-        <select
-          value={filters.category || ""}
-          onChange={e => setFilters({ ...filters, category: e.target.value || null })}
-        >
-          <option value="">All Categories</option>
-          <option value="active">Active</option>
-          <option value="passive">Passive</option>
-          <option value="market">Market</option>
-          <option value="scenic">Scenic</option>
-        </select>
-      </div>
-
       <MapContainer
         center={hamiltonCenter}
         zoom={13}
@@ -63,7 +20,7 @@ export default function MapView() {
         />
 
         <>
-          {filteredEvents.map(event => (
+          {events.map(event => (
             <Marker
               key={event.id}
               position={[event.location.lat, event.location.lng]}

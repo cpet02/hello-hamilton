@@ -1,0 +1,83 @@
+\documentclass[12pt]{article}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Hello Hamilton: Progress Tracking Sheet}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Legend}
+\begin{itemize}[leftmargin=*]
+    \item[$\square$] Not started
+    \item[$\boxtimes$] In progress
+    \item[$\blacksquare$] Completed
+\end{itemize}
+
+\section*{1. Frontend Setup}
+\begin{itemize}[leftmargin=*]
+    \item[$\blacksquare$] Initialize React + Vite project
+    \item[$\blacksquare$] Install Leaflet and import CSS
+    \item[$\blacksquare$] Render base map
+    \item[$\blacksquare$] Create MapView component
+\end{itemize}
+
+\section*{2. Backend Setup}
+\begin{itemize}[leftmargin=*]
+    \item[$\blacksquare$] Initialize Express server
+    \item[$\blacksquare$] Add CORS middleware
+    \item[$\blacksquare$] Create \texttt{/events} route
+    \item[$\blacksquare$] Return static JSON dataset
+\end{itemize}
+
+\section*{3. Data Pipeline}
+\begin{itemize}[leftmargin=*]
+    \item[$\blacksquare$] Finalize event schema
+    \item[$\blacksquare$] Fetch backend events in frontend
+    \item[$\blacksquare$] Render map markers from data
+\end{itemize}
+
+\section*{4. Filtering System}
+\subsection*{4.1 UI Components}
+\begin{itemize}[leftmargin=*]
+    \item[$\boxtimes$] Create FilterPanel component
+    \item[$\square$] Add Category dropdown
+    \item[$\square$] Add Cost selector
+    \item[$\square$] Add Indoor/Outdoor toggle
+    \item[$\square$] Add Energy level selector
+    \item[$\square$] Add Seasonal selector
+    \item[$\square$] Add Group size selector
+    \item[$\square$] Style the panel (desktop + mobile)
+\end{itemize}
+
+\subsection*{4.2 Logic}
+\begin{itemize}[leftmargin=*]
+    \item[$\boxtimes$] Centralized filter state
+    \item[$\square$] Write reusable filtering function
+    \item[$\square$] Connect UI → state → filtered events
+    \item[$\square$] Ensure filtering does not break map performance
+\end{itemize}
+
+\section*{5. Database Integration (Day 4+)}
+\begin{itemize}[leftmargin=*]
+    \item[$\square$] Install Prisma
+    \item[$\square$] Configure PostgreSQL connector
+    \item[$\square$] Create Prisma schema
+    \item[$\square$] Migrate database
+    \item[$\square$] Seed initial events
+    \item[$\square$] Replace static JSON with DB read
+\end{itemize}
+
+\section*{6. Additional Features}
+\begin{itemize}[leftmargin=*]
+    \item[$\square$] Search bar for event names
+    \item[$\square$] Geolocation: events near me
+    \item[$\square$] List view of events
+    \item[$\square$] User-submitted events form
+    \item[$\square$] Admin panel
+    \item[$\square$] Automated event scraping
+    \item[$\square$] Dark mode polish
+\end{itemize}
+
+\end{document}

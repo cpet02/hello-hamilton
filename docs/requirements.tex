@@ -1,0 +1,81 @@
+\documentclass[12pt]{article}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Hello Hamilton: Requirements Document}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{1. Project Overview}
+Hello Hamilton is a map-based event and attraction viewer for Hamilton, Ontario. 
+It displays both upcoming events and permanent attractions using a React + Vite frontend and an Express backend. 
+A PostgreSQL database with Prisma ORM will be integrated later.
+
+\section*{2. High-Level Goals}
+\begin{itemize}[leftmargin=*]
+    \item Provide a clean map interface for discovering local events and attractions.
+    \item Allow users to apply multiple filters simultaneously.
+    \item Support scalable event data from various sources.
+    \item Organize experiences for both locals and newcomers.
+\end{itemize}
+
+\section*{3. Functional Requirements}
+
+\subsection*{3.1 Frontend}
+\begin{itemize}[leftmargin=*]
+    \item Render an interactive Leaflet map.
+    \item Fetch event data from backend API.
+    \item Display event markers with popups.
+    \item Provide filtering UI:
+    \begin{itemize}
+        \item Category
+        \item Cost
+        \item Indoor/Outdoor
+        \item Energy Level
+        \item Seasonal
+        \item Group Size
+    \end{itemize}
+    \item Apply combined filters and update visible markers.
+\end{itemize}
+
+\subsection*{3.2 Backend}
+\begin{itemize}[leftmargin=*]
+    \item Serve event data at \texttt{/events}.
+    \item Provide CORS-safe responses for local development.
+    \item Validate event schema (manual now, Prisma later).
+    \item Prepare for future database integration.
+\end{itemize}
+
+\subsection*{3.3 Future Database Layer}
+\begin{itemize}[leftmargin=*]
+    \item A Prisma schema representing the finalized event structure.
+    \item PostgreSQL database with seeded events.
+    \item Replace static event JSON with DB queries.
+    \item Enable real-time filtering on server side for large datasets.
+\end{itemize}
+
+\section*{4. Non-Functional Requirements}
+\begin{itemize}[leftmargin=*]
+    \item Clean, minimal UI usable on desktop and mobile.
+    \item Maintainable code structure:
+    \begin{itemize}
+        \item Clear component hierarchy
+        \item Centralized filter state
+    \end{itemize}
+    \item Future-proofing for integrations:
+    \begin{itemize}
+        \item Automated data ingestion
+        \item AI-based autofill of event fields
+    \end{itemize}
+\end{itemize}
+
+\section*{5. Constraints}
+\begin{itemize}[leftmargin=*]
+    \item No database or ORM integration until Day 4+.
+    \item Limited initial dataset (manual JSON).
+    \item Prioritize clarity and incremental progress.
+\end{itemize}
+
+\end{document}

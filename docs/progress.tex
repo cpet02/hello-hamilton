@@ -1,0 +1,63 @@
+\documentclass[12pt]{article}
+\usepackage{enumitem}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Hello Hamilton: Progress Log and Roadmap}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{1. Completed Milestones}
+
+\subsection*{Day 1--2}
+\begin{itemize}[leftmargin=*]
+    \item Project created with clear architecture vision.
+    \item Frontend scaffolded using React + Vite.
+    \item Leaflet map successfully rendered.
+    \item Backend Express server created.
+    \item Event route (\texttt{/events}) returning hardcoded JSON.
+    \item Frontend fetching events from backend.
+    \item Map markers placed using event coordinates.
+    \item Basic category filter implemented.
+    \item Full event schema finalized.
+\end{itemize}
+
+\section*{2. Current Focus (Day 3)}
+\begin{itemize}[leftmargin=*]
+    \item Build full multi-filter panel.
+    \item Create scalable filter state system.
+    \item Implement UI for all filters.
+    \item Combine filters into unified logic.
+\end{itemize}
+
+\section*{3. Near-Term Objectives (Day 4--6)}
+\begin{itemize}[leftmargin=*]
+    \item Install Prisma.
+    \item Configure PostgreSQL connection.
+    \item Create Prisma schema matching event model.
+    \item Migrate and seed database.
+    \item Replace static JSON with DB queries.
+    \item Move filtering logic optionally to backend.
+\end{itemize}
+
+\section*{4. Longer-Term Objectives}
+\begin{itemize}[leftmargin=*]
+    \item Search bar for event names.
+    \item "Events near me" geolocation support.
+    \item Dedicated event cards + list view.
+    \item User-submitted events.
+    \item Admin panel with event editing tools.
+    \item Daily automatic updates from public feeds.
+    \item Optional: AI-assisted extraction for event details.
+\end{itemize}
+
+\section*{5. Nice-to-Haves}
+\begin{itemize}[leftmargin=*]
+    \item Dark mode polish.
+    \item Category icons.
+    \item Simple animations on map interactions.
+    \item Public API endpoint for other Hamilton devs.
+\end{itemize}
+
+\end{document}
