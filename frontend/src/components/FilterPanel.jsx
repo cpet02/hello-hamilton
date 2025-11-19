@@ -1,12 +1,11 @@
-import React from 'react';
-import './FilterPanel.css';
+import React from "react";
+import "./FilterPanel.css";
 
 function FilterPanel({ filters, setFilters }) {
-
   function updateFilter(key, value) {
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
-      [key]: value === "" ? null : value
+      [key]: value === "" ? null : value,
     }));
   }
 
@@ -48,11 +47,7 @@ function FilterPanel({ filters, setFilters }) {
         <label>Indoor / Outdoor</label>
         <select
           value={
-            filters.indoor === null
-              ? ""
-              : filters.indoor
-                ? "indoor"
-                : "outdoor"
+            filters.indoor === null ? "" : filters.indoor ? "indoor" : "outdoor"
           }
           onChange={(e) => {
             const v = e.target.value;
@@ -110,6 +105,25 @@ function FilterPanel({ filters, setFilters }) {
         </select>
       </div>
 
+      <button
+        onClick={() => {
+          setFilters({
+            category: null,
+            cost: null,
+            indoor: null,
+            energy: null,
+            seasonal: null,
+            groupSize: null,
+          });
+        }}
+        style={{
+          marginTop: "10px",
+          padding: "8px 12px",
+          cursor: "pointer",
+        }}
+      >
+        Clear Filters
+      </button>
     </div>
   );
 }

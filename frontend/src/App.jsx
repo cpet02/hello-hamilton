@@ -52,9 +52,10 @@ function App() {
       }
 
       // GROUP SIZE
-      if (filters.groupSize && event.groupSize !== filters.groupSize) {
+      if (filters.groupSize && !event.groupSize.includes(filters.groupSize)) {
         return false;
       }
+
 
       return true;
     });
