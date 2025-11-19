@@ -1,0 +1,38 @@
+// Prisma schema for Hello Hamilton Event Aggregator
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+
+  // JSON location: { lat: Number, lng: Number }
+  location    Json
+
+  // Basic filter fields
+  category    String?   // "food", "sports", "attraction", etc.
+  cost        String?   // "free", "paid"
+  indoor      Boolean?  // true / false
+  energy      String?   // "low", "medium", "high"
+  seasonal    String?   // "all", "summer", "winter", etc.
+
+  // Additional structured filter
+  // groupSize: ["solo", "pair", "small", "large"]
+  groupSize   Json?
+
+  // Extra metadata from Day 3 (carDependency, hobbyLevel, etc.)
+  extra       Json?     // any additional scraped/enriched metadata
+
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
