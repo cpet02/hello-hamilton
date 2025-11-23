@@ -1,6 +1,27 @@
 import FilterPanel from './components/FilterPanel';
 import MapView from './components/MapView';
 import { useState, useEffect } from 'react';
+import debounce from "lodash.debounce";
+
+function buildQueryParams(filters) {
+  const params = new URLSearchParams();
+
+  if (filters.category) params.append("category", filters.category);
+  if (filters.cost) params.append("cost", filters.cost);
+
+  if (filters.indoor !== null) {
+    params.append("indoor", filters.indoor);
+  }
+
+  if (filters.energy) params.append("energy", filters.energy);
+  if (filters.seasonal) params.append("seasonal", filters.seasonal);
+
+  if (filters.groupSize) {
+    params.append("groupSize", filters.groupSize);
+  }
+
+  return params.toString();
+}
 
 function App() {
   const [filters, setFilters] = useState({
@@ -13,67 +34,49 @@ function App() {
   });
 
   const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:3000/events')
-      .then(res => res.json())
-      .then(data => {
-        console.log("Raw events from backend:", data);
-        setEvents(data);
-      })
-      .catch(err => console.error(err));
-  }, []);
+    const fetchEvents = debounce(() => {
+      setLoading(true);
 
-  function applyFilters(events, filters) {
-    return events.filter(event => {
-      // CATEGORY
-      if (filters.category && event.category !== filters.category) {
-        return false;
-      }
+      const query = buildQueryParams(filters);
+      const url = query
+        ? `http://localhost:3000/events?${query}`
+        : "http://localhost:3000/events";
 
-      // COST
-      if (filters.cost && event.cost !== filters.cost) {
-        return false;
-      }
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          console.log("Filtered events from backend:", data);
+          setEvents(data);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error(err);
+          setLoading(false);
+        });
+    }, 300);
 
-      // INDOOR / OUTDOOR
-      if (filters.indoor !== null && event.indoor !== filters.indoor) {
-        return false;
-      }
+    fetchEvents();
 
-      // ENERGY LEVEL
-      if (filters.energy && event.energy !== filters.energy) {
-        return false;
-      }
-
-      // SEASONAL
-      if (filters.seasonal && event.seasonal !== filters.seasonal) {
-        return false;
-      }
-
-      // GROUP SIZE
-      if (filters.groupSize && !event.groupSize.includes(filters.groupSize)) {
-        return false;
-      }
-
-
-      return true;
-    });
-  }
-
-  const filteredEvents = applyFilters(events, filters);
-
-  console.log(filters);
-  console.log("Filtered:", filteredEvents);
+    return () => fetchEvents.cancel();
+  }, [filters]);
 
   return (
     <div style={{ display: 'flex' }}>
       <FilterPanel filters={filters} setFilters={setFilters} />
-      <MapView events={filteredEvents} />
+
+      <div style={{ flexGrow: 1 }}>
+        {loading && (
+          <p style={{ marginLeft: "20px", color: "#888" }}>
+            Loading…
+          </p>
+        )}
+        <MapView events={events} />
+      </div>
     </div>
   );
 }
 
 export default App;
-
-

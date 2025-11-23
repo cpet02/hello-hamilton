@@ -27,10 +27,13 @@ model Event {
 
   // Additional structured filter
   // groupSize: ["solo", "pair", "small", "large"]
-  groupSize   Json?
+  groupSize   String[]
 
   // Extra metadata from Day 3 (carDependency, hobbyLevel, etc.)
   extra       Json?     // any additional scraped/enriched metadata
+
+  source      String? 
+  freshness   Json?  
 
   // Timestamps
   createdAt   DateTime @default(now())
