@@ -16,7 +16,7 @@ model Event {
   description String?
 
   // JSON location: { lat: Number, lng: Number }
-  location    Json
+  location    Json?
 
   // Basic filter fields
   category    String?   // "food", "sports", "attraction", etc.
@@ -24,6 +24,9 @@ model Event {
   indoor      Boolean?  // true / false
   energy      String?   // "low", "medium", "high"
   seasonal    String?   // "all", "summer", "winter", etc.
+
+  startDate   DateTime?
+  endDate     DateTime?
 
   // Additional structured filter
   // groupSize: ["solo", "pair", "small", "large"]
